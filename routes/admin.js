@@ -12,9 +12,9 @@ router.get("/products", isAuth, adminController.getProducts);
 router.post(
   "/add-product",
   [
-    body("title").isString().isLength({ min: 3 }).trim().not().isEmpty(),
-    body("price").isFloat(),
-    body("description").isLength({ min: 5, max: 400 }).trim(),
+    body("title").isString().isLength({ min: 3 }).withMessage("Title should be greater than 2 characters").trim().not().isEmpty(),
+    body("price").isFloat().withMessage("Price should be an number"),
+    body("description").isLength({ min: 5, max: 400 }).withMessage("Description should be greater than 4 characters").trim(),
   ],
   isAuth,
   adminController.postAddProduct
